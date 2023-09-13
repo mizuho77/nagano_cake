@@ -13,26 +13,67 @@
   <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
-      <!--顧客用ヘッダー-->
-        <% if customer_signed_in? %>
-          商品一覧
-      <li>
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-      </li>
-    <% elsif admin_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_customer_session_path %>
-      </li>
-    <% end %>
-  </header>
 
+      <!--管理者用ヘッダー-->
+      <% if admin_signed_in? %>
+        <li class="nav-item">
+          <%= link_to admin_items_path do %>
+            商品一覧
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_customers_path do %>
+            会員一覧
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_path  do %>
+            <i class="fas fa-clipboard-list">注文履歴一覧</i>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        </li>
+      <!--顧客用ヘッダー-->
+      <% elsif customer_signed_in? %>
+        <li class="nav-item">
+          <%= link_to customers_path do %>
+            マイページ
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to  items_path do %>
+            商品一覧
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to cart_items_path do %>
+            カート
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+        </li>
+        <!--ログイン前ヘッダー-->
+        <% else %>
+        <li class="nav-item">
+          <%= link_to about_path do %>
+            About
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to public_items_path do %>
+            商品一覧
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "新規登録", new_customer_registration_path %>
+        </li>
+        <li>
+        <%= link_to "ログイン", new_customer_session_path %>
+        </li>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
