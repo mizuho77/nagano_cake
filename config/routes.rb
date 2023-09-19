@@ -24,7 +24,13 @@ devise_for :customers,skip: [:passwords], controllers: {
     root to: "homes#top"
     get "about" => "homes#about"
     resources :items, only: [:index, :show]
-    resources :customers, only: [:show, :edit, :check]
+    resources :customers, only: [:show, :edit, :update, :check]
+    patch "/customers/withdraw" => "customers#withdraw"
+    resources :cart_items, only: [:index, :create, :destroy, :update]
+    delete "/cart_items/destroy_all" => "cart_items#destroy_all"
+    resources :orders, only: [:new, :create, :index, :show]
+    post "/orders/check" => "orders#check"
+    get "/orders/thanks" => "orders#thanks"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

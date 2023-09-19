@@ -37,7 +37,7 @@
       <!--顧客用ヘッダー-->
       <% elsif customer_signed_in? %>
         <li class="nav-item">
-          <%= link_to customers_path do %>
+          <%= link_to customer_path(current_customer.id) do %>
             マイページ
           <% end %>
         </li>
