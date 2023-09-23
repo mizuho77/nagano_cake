@@ -19,6 +19,15 @@ class Public::CustomersController < ApplicationController
     end
   end
 
+  def withdraw
+    @customer = current_customer
+    @customer.is_deleted = true
+    if @customer.save
+      sign_out(@customer)
+      redirect_to root_path
+    end
+  end
+
     private
 
   def customer_params

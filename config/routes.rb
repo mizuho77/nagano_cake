@@ -24,11 +24,11 @@ devise_for :customers,skip: [:passwords], controllers: {
     root to: "homes#top"
     get "about" => "homes#about"
     resources :items, only: [:index, :show]
-    resources :customers, only: [:update]
     get "/customers/editpage" => "customers#edit"
     get "/customers/mypage" => "customers#show"
-    get "/customers/check" => "customes#check"
+    get "/customers/check" => "customers#check"
     patch "/customers/withdraw" => "customers#withdraw"
+    resources :customers, only: [:update]
     resources :cart_items, only: [:index, :create, :destroy, :update]
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
     resources :orders, only: [:new, :create, :index, :show]
